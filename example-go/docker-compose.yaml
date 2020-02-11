@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    app:
+      build:
+        context: .
+        dockerfile: ./alpine-multi/Dockerfile
+      volumes:
+        - .:/app
+      ports:
+        - "8080:8080"
+      expose: 
+        - "8080"

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    db:
+      image: postgres
+      volumes:
+        - /tmp/postgresql/data:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+      expose:
+        - "5432"
+      env_file: local.env
+    web:
+      build:
+        context: .
+        dockerfile: ./alpine/Dockerfile
+      volumes:
+        - .:/app
+      ports:
+        - "8000:8000"
+      expose: 
+        - "8000"
+      depends_on:
+        - db
+      links:
+        - db
+      env_file: local.env
